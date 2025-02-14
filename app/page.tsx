@@ -1,20 +1,12 @@
 import { Navigation } from "./components/navigation"
+import { HeroSection } from "./components/sections/hero-section"
 
 export default function Home() {
   return (
     <main className="bg-white">
       <Navigation />
+      <HeroSection />
       
-      {/* Hero Section */}
-      <section id="home" className="bg-gradient-to-b from-[#00334D] to-[#004D73] text-white py-20">
-        <div className="container mx-auto px-6">
-          <h1 className="text-5xl font-bold mb-6">Welcome to NovaLabs AI</h1>
-          <p className="text-xl max-w-2xl mb-8">
-            Pioneering AI solutions in healthcare, cybersecurity, and sustainable energy.
-          </p>
-        </div>
-      </section>
-
       {/* About Section */}
       <section id="about" className="py-20">
         <div className="container mx-auto px-6">
@@ -73,7 +65,6 @@ export default function Home() {
             <p className="text-lg text-gray-700 mb-8">
               Interested in learning more about our solutions or discussing potential collaborations? Get in touch with our team.
             </p>
-            {/* We can add a contact form here later */}
           </div>
         </div>
       </section>
