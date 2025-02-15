@@ -3,10 +3,12 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: ['novalabsai.ai'],
-  },
-  i18n: {
-    locales: ['en', 'es', 'fr', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko'],
-    defaultLocale: 'en',
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'novalabsai.ai',
+      },
+    ],
   },
 }
 
