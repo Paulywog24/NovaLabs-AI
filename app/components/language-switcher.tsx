@@ -1,5 +1,4 @@
 "use client"
-
 import * as React from "react"
 import { Languages } from "lucide-react"
 import { useRouter, useSearchParams } from "next/navigation"
@@ -47,20 +46,13 @@ const languages: Language[] = [
     name: "French",
     nativeName: "Français",
     flag: "🇫🇷"
-  },
-  {
-    code: "de",
-    name: "German",
-    nativeName: "Deutsch",
-    flag: "🇩🇪"
   }
 ]
 
-export function LanguageSwitcher() {
+function LanguageSwitcherContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   
-  // Get initial language from URL or default to 'en'
   const [currentLang, setCurrentLang] = React.useState(() => {
     const langParam = searchParams.get("lang")
     return langParam && languages.some(lang => lang.code === langParam)
@@ -68,21 +60,16 @@ export function LanguageSwitcher() {
       : "en"
   })
 
-  // Update URL and document language when selection changes
   const handleLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newLang = event.target.value
     setCurrentLang(newLang)
     document.documentElement.lang = newLang
     
-    // Create new URLSearchParams object and update language
     const params = new URLSearchParams(searchParams.toString())
     params.set("lang", newLang)
-    
-    // Update URL without refresh
     router.push(`?${params.toString()}`, { scroll: false })
   }
 
-  // Update document language on mount and language change
   React.useEffect(() => {
     document.documentElement.lang = currentLang
   }, [currentLang])
@@ -103,5 +90,13 @@ export function LanguageSwitcher() {
         ))}
       </select>
     </div>
+  )
+}
+
+export function LanguageSwitcher() {
+  return (
+    <React.Suspense fallback={<div className="h-4 w-4" />}>
+      <LanguageSwitcherContent />
+    </React.Suspense>
   )
 }
